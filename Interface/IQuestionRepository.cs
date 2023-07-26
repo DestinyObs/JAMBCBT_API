@@ -11,5 +11,6 @@ namespace JAMBAPI.Interface
         Task<Question> CreateQuestionAsync(Question question);
         Task<Question> UpdateQuestionAsync(Question question);
         Task DeleteQuestionAsync(int id);
+        Task<List<Question>> GetQuestionsByIdsAsync(List<int> questionIds);
     }
 }

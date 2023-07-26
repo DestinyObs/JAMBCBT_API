@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public int SubjectId { get; set; }
-        public int LecturerId { get; set; }
+        //public int LecturerId { get; set; }
         public int DurationInMinutes { get; set; }
         public DateTime DateCreated { get; set; }
         public Subject Subject { get; set; }

@@ -86,7 +86,7 @@ namespace JAMBAPI.Repositories
             }
         }
 
-        public async Task<bool> DoesLecturerExistAsync(int lecturerId)
+        public async Task<bool> DoesLecturerExistAsync(int? lecturerId)
         {
             return await _dbContext.Lecturers.AnyAsync(l => l.Id == lecturerId);
         }

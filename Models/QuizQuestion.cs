@@ -8,6 +8,8 @@
         public int Order { get; set; }
         public Quiz Quiz { get; set; }
         public Question Question { get; set; }
+        public ICollection<Option> Options { get; set; }
+
     }
 
 }

@@ -47,6 +47,8 @@ namespace JAMBAPI
             builder.Services.AddScoped<ISubjectRepository, SubjectRepository>();
             builder.Services.AddScoped<ILecturerRepository, LecturerRepository>();
             builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
+            builder.Services.AddScoped<IQuizRepository, QuizRepository>();
+
 
 
             var app = builder.Build();

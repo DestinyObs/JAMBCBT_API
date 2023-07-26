@@ -67,11 +67,11 @@ namespace JAMBAPI.Controllers
             try
             {
                 // Check if the LecturerId exists
-                var lecturerExists = await _lecturerRepository.DoesLecturerExistAsync(questionDto.LecturerId);
-                if (!lecturerExists)
-                {
-                    return BadRequest("Lecturer with the specified Id does not exist.");
-                }
+                //var lecturerExists = await _lecturerRepository.DoesLecturerExistAsync(questionDto.LecturerId);
+                //if (!lecturerExists)
+                //{
+                //    return BadRequest("Lecturer with the specified Id does not exist.");
+                //}
 
                 // Check if the SubjectId exists
                 var subjectExists = await _subjectRepository.DoesSubjectExistAsync(questionDto.SubjectId);
@@ -83,7 +83,7 @@ namespace JAMBAPI.Controllers
                 // Create a new question entity from the DTO
                 var question = new Question
                 {
-                    LecturerId = questionDto.LecturerId,
+                    //LecturerId = questionDto.LecturerId,
                     SubjectId = questionDto.SubjectId,
                     Text = questionDto.Text
                 };
@@ -128,7 +128,7 @@ namespace JAMBAPI.Controllers
 
                 // Update the question entity with the new values from the DTO
 
-                question.LecturerId = questionDto.LecturerId;
+                //question.LecturerId = questionDto.LecturerId;
                 question.SubjectId = questionDto.SubjectId;
                 question.Text = questionDto.Text;
 

@@ -20,6 +20,6 @@ namespace JAMBAPI.Interface
         Task<bool> SaveChangesAsync();
         Task SendApprovalEmail(string email);
         Task SendRejectionEmail(string email);
-        Task<bool> DoesLecturerExistAsync(int lecturerId);
+        Task<bool> DoesLecturerExistAsync(int? lecturerId);
     }
 }

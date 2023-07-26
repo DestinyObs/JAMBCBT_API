@@ -26,6 +26,12 @@ namespace JAMBAPI.Repositories
         {
             return await _dbContext.Questions.FirstOrDefaultAsync(q => q.Id == id);
         }
+        public async Task<List<Question>> GetQuestionsByIdsAsync(List<int> questionIds)
+        {
+            return await _dbContext.Questions
+                .Where(q => questionIds.Contains(q.Id))
+                .ToListAsync();
+        }
 
         public async Task<Question> CreateQuestionAsync(Question question)
         {

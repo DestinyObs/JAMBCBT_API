@@ -45,8 +45,9 @@ namespace JAMBAPI.Repositories
                 FullName = lecturerDto.FullName,
                 Email = lecturerDto.Email,
                 Department = lecturerDto.Department,
+                About = lecturerDto.About,
                 IsApproved = false, 
-            Password = BCrypt.Net.BCrypt.HashPassword(lecturerDto.Password)
+                Password = BCrypt.Net.BCrypt.HashPassword(lecturerDto.Password)
             };
 
 

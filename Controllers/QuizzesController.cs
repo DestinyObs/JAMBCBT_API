@@ -33,7 +33,7 @@ namespace JAMBAPI.Controllers
 
 
         // Create a mapping function to convert QuestionOptionDto to Option
-        public Option MapToOption(QuestionOptionDto questionOptionDto)
+        private Option MapToOption(QuestionOptionDto questionOptionDto)
         {
             return new Option
             {
@@ -42,7 +42,7 @@ namespace JAMBAPI.Controllers
             };
         }
 
-        [HttpPost]
+        [HttpPost("{CreateQuiz}")]
         public async Task<IActionResult> CreateQuiz(QuizCreateDto quizCreateDto)
         {
             try

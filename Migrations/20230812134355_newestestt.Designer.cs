@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JAMBAPI.Migrations
 {
     [DbContext(typeof(JambDbContext))]
-    [Migration("20230719091915_Newest")]
-    partial class Newest
+    [Migration("20230812134355_newestestt")]
+    partial class newestestt
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,34 @@ namespace JAMBAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("JAMBAPI.Models.Admin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("CanManageAdmins")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Admins");
+                });
 
             modelBuilder.Entity("JAMBAPI.Models.IrisScan", b =>
                 {
@@ -80,20 +108,30 @@ namespace JAMBAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("About")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Department")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("StudentId");
 
                     b.ToTable("Lecturers");
                 });
@@ -117,9 +155,6 @@ namespace JAMBAPI.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserdId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
@@ -138,7 +173,14 @@ namespace JAMBAPI.Migrations
                     b.Property<bool>("IsCorrect")
                         .HasColumnType("bit");
 
+                    b.Property<string>("OptionLetter")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("QuestionId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("QuizQuestionId")
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
@@ -148,6 +190,8 @@ namespace JAMBAPI.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("QuestionId");
+
+                    b.HasIndex("QuizQuestionId");
 
                     b.ToTable("Options");
                 });
@@ -160,11 +204,7 @@ namespace JAMBAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Explanation")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("LecturerId")
+                    b.Property<int?>("LecturerId")
                         .HasColumnType("int");
 
                     b.Property<int>("SubjectId")
@@ -199,6 +239,10 @@ namespace JAMBAPI.Migrations
 
                     b.Property<int>("LecturerId")
                         .HasColumnType("int");
+
+                    b.Property<string>("QuizTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SubjectId")
                         .HasColumnType("int");
@@ -236,6 +280,31 @@ namespace JAMBAPI.Migrations
                     b.HasIndex("QuizId");
 
                     b.ToTable("QuizQuestions");
+                });
+
+            modelBuilder.Entity("JAMBAPI.Models.QuizReport", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("DateTaken")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("QuizId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("QuizReports");
                 });
 
             modelBuilder.Entity("JAMBAPI.Models.Subject", b =>
@@ -278,6 +347,12 @@ namespace JAMBAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsLocked")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsSuspended")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsVerified")
                         .HasColumnType("bit");
 
@@ -302,8 +377,10 @@ namespace JAMBAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("VerificationCode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("VerificationCodeExpiration")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -369,17 +446,6 @@ namespace JAMBAPI.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("JAMBAPI.Models.Lecturer", b =>
-                {
-                    b.HasOne("JAMBAPI.Models.User", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Student");
-                });
-
             modelBuilder.Entity("JAMBAPI.Models.OLevelGrade", b =>
                 {
                     b.HasOne("JAMBAPI.Models.User", "User")
@@ -399,26 +465,24 @@ namespace JAMBAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("JAMBAPI.Models.QuizQuestion", null)
+                        .WithMany("Options")
+                        .HasForeignKey("QuizQuestionId");
+
                     b.Navigation("Question");
                 });
 
             modelBuilder.Entity("JAMBAPI.Models.Question", b =>
                 {
-                    b.HasOne("JAMBAPI.Models.Lecturer", "Lecturer")
+                    b.HasOne("JAMBAPI.Models.Lecturer", null)
                         .WithMany("Questions")
-                        .HasForeignKey("LecturerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("LecturerId");
 
-                    b.HasOne("JAMBAPI.Models.Subject", "Subject")
+                    b.HasOne("JAMBAPI.Models.Subject", null)
                         .WithMany("Questions")
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Lecturer");
-
-                    b.Navigation("Subject");
                 });
 
             modelBuilder.Entity("JAMBAPI.Models.Quiz", b =>
@@ -497,6 +561,11 @@ namespace JAMBAPI.Migrations
                     b.Navigation("QuizQuestions");
 
                     b.Navigation("UserProgresses");
+                });
+
+            modelBuilder.Entity("JAMBAPI.Models.QuizQuestion", b =>
+                {
+                    b.Navigation("Options");
                 });
 
             modelBuilder.Entity("JAMBAPI.Models.Subject", b =>

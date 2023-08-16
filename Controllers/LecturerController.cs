@@ -20,6 +20,7 @@ namespace JAMBAPI.Controllers
         {
             _lecturerRepository = lecturerRepository;
             _jambDbContext = jambDbContext;
+
         }
 
         [HttpPost("register")]
@@ -96,57 +97,7 @@ namespace JAMBAPI.Controllers
             return Ok(lecturers);
         }
 
-        [HttpPut("{id}/approve")]
-        public async Task<IActionResult> ApproveLecturer(int id)
-        {
-            try
-            {
-                var lecturer = await _lecturerRepository.GetByIdAsync(id);
-                if (lecturer == null)
-                {
-                    return NotFound("Lecturer not found.");
-                }
-
-                if (lecturer.IsApproved)
-                {
-                    return BadRequest("Account as Already been Approved!!!");
-                }
-
-                await _lecturerRepository.ApproveLecturerAsync(id);
-
-                // Send approval email to lecturer
-                await _lecturerRepository.SendApprovalEmail(lecturer.Email);
-
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
-            return Ok("Lecturer approved successfully. An approval email has been sent.");
-        }
-
-        [HttpPut("{id}/reject")]
-        public async Task<IActionResult> RejectLecturer(int id)
-        {
-            var lecturer = await _lecturerRepository.GetByIdAsync(id);
-            if (lecturer == null)
-            {
-                return NotFound("Lecturer not found.");
-            }
-
-            if (lecturer.IsApproved)
-            {
-                return BadRequest("Account as Already been Approved!!!");
-            }
-
-            await _lecturerRepository.RejectLecturerAsync(id);
-
-            // Send rejection email to lecturer
-            await _lecturerRepository.SendRejectionEmail(lecturer.Email);
-
-
-            return Ok("Lecturer rejected successfully. A rejection email has been sent.");
-        }
+       
 
         [HttpPost("login")]
         public IActionResult Login(UserLoginDto userDto)
@@ -166,7 +117,7 @@ namespace JAMBAPI.Controllers
 
             if (!lecturer.IsApproved)
             {
-                return BadRequest("Account is not yet verified. Please verify your email.");
+                return BadRequest("Account is still PENDING approval. Please be patient if you are approved or declined we'd let you know!.");
             }
             return Ok("Login successful.");
         }

@@ -16,11 +16,12 @@ namespace JAMBAPI.Data
         public DbSet<Lecturer> Lecturers { get; set; }
         public DbSet<OLevelGrade> OLevelGrades { get; set; }
         public DbSet<IrisScan> IrisScans { get; set; }
+        public DbSet<Admin> Admins { get; set; }
+        public DbSet<QuizReport> QuizReports { get; set; }
 
         public JambDbContext(DbContextOptions<JambDbContext> options) : base(options)
         {
         }
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

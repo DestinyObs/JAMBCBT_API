@@ -16,5 +16,7 @@
         public bool IsVerified { get; set; } // Add 'IsVerified' property
         public string? VerificationCode { get; set; } // Add 'VerificationCode' property
         public DateTime VerificationCodeExpiration { get; set; }
+        public bool IsLocked { get; set; } // Add 'IsLocked' property
+        public bool IsSuspended { get; set; } // Add 'IsSuspended' property
     }
 }

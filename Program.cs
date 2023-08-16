@@ -2,6 +2,7 @@ using JAMBAPI.Authorization;
 using JAMBAPI.Data;
 using JAMBAPI.Interface;
 using JAMBAPI.Repositories;
+using JAMBAPI.SeedData;
 using JAMBAPI.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -48,10 +49,16 @@ namespace JAMBAPI
             builder.Services.AddScoped<ILecturerRepository, LecturerRepository>();
             builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
             builder.Services.AddScoped<IQuizRepository, QuizRepository>();
-
-
+            builder.Services.AddScoped<ISuperAdminRepository, SuperAdminRepository>();
+            
 
             var app = builder.Build();
+
+            if (args.Length == 1 && args[0].ToLower() == "seeddata")
+            {
+                 SeedSuperAdmin.Initialize(app);
+                //Seed.SeedData(app);
+            }
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -59,6 +66,7 @@ namespace JAMBAPI
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            
 
             app.UseHttpsRedirection();
 

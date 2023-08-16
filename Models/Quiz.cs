@@ -3,6 +3,7 @@
     public class Quiz
     {
         public int Id { get; set; }
+        public string QuizTitle { get; set; }
         public int SubjectId { get; set; }
         //public int LecturerId { get; set; }
         public int DurationInMinutes { get; set; }

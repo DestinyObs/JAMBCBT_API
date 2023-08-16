@@ -12,7 +12,7 @@ namespace JAMBAPI.Models
 
         public string Grade { get; set; }
 
-        public int UserdId { get; set; }
+        //public int UserdId { get; set; }
 
         [ForeignKey("UserId")]
         public User User { get; set; }

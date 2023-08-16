@@ -4,20 +4,20 @@
 
 namespace JAMBAPI.Migrations
 {
-    public partial class newesstttt : Migration
+    public partial class newest : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "CorrectOptionIndex",
-                table: "Questions");
+                name: "UserdId",
+                table: "OLevelGrades");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
-                name: "CorrectOptionIndex",
-                table: "Questions",
+                name: "UserdId",
+                table: "OLevelGrades",
                 type: "int",
                 nullable: false,
                 defaultValue: 0);

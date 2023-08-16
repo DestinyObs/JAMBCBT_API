@@ -10,6 +10,7 @@ namespace JAMBAPI.ViewModels.DTOs
         public string Email { get; set; }
         public string Department { get; set; }
         public string Password { get; set; }
+        public string About { get; set; }
         public string ConfirmPassword { get; set; }
     }
 }

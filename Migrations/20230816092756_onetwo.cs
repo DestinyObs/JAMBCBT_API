@@ -4,23 +4,23 @@
 
 namespace JAMBAPI.Migrations
 {
-    public partial class newessttt : Migration
+    public partial class onetwo : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<bool>(
-                name: "IsCorrect",
-                table: "Options",
-                type: "bit",
+            migrationBuilder.AddColumn<string>(
+                name: "SpecialId",
+                table: "Admins",
+                type: "nvarchar(max)",
                 nullable: false,
-                defaultValue: false);
+                defaultValue: "");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "IsCorrect",
-                table: "Options");
+                name: "SpecialId",
+                table: "Admins");
         }
     }
 }

@@ -9,10 +9,10 @@ namespace JAMBAPI.Interface
     {
         Task<Admin> GetSuperAdminByEmailAsync(string email);
         Task<AdminDto> CreateAdminAsync(AdminDto admin); // Create a new admin
-        Task<Admin> UpdateAdminAsync(int adminId, Admin admin); // Update an existing admin
-        Task<bool> DeleteAdminAsync(int adminId); // Delete an admin
-        Task<Admin> GetAdminByIdAsync(int adminId); // Get admin details by ID
-        Task<bool> AdminExistsAsync(int adminId); // Check if an admin exists by ID
+        Task<Admin> UpdateAdminAsync(string adminSpecialId, Admin admin); // Update an existing admin
+        Task<bool> DeleteAdminAsync(string adminSpecialId); // Delete an admin
+        Task<Admin> GetAdminBySpecialIdAsync(string adminSpecialId); // Get admin details by special ID
+        Task<bool> AdminExistsAsync(string adminSpecialId); // Check if an admin exists by special ID
 
         Task<User> GetUserByIdAsync(int userId); // Get user details by ID
         Task<bool> UserExistsAsync(int userId); // Check if a user exists by ID
@@ -29,8 +29,10 @@ namespace JAMBAPI.Interface
         Task<bool> UnlockUserAccountAsync(int userId); // Unlock a user's account
         Task<bool> SuspendUserAsync(int userId); // Suspend a user's account
         Task<bool> ReinstateUserAsync(int userId); // Reinstate a suspended user's account
-
-
+        Task<bool> LockLecturerAccountAsync(int LecturerId); // Lock a user's account
+        Task<bool> UnlockLecturerAccountAsync(int LecturerId); // Unlock a user's account
+        Task<bool> SuspendLecturerAsync(int LecturerId); // Suspend a user's account
+        Task<bool> ReinstateLecturerAsync(int LecturerId); // Reinstate a suspended user's account
 
         // Add other methods as needed for SuperAdmin management
     }

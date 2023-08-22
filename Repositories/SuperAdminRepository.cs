@@ -283,5 +283,45 @@ namespace JAMBAPI.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public Task<Admin> UpdateAdminAsync(string adminSpecialId, Admin admin)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteAdminAsync(string adminSpecialId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Admin> GetAdminBySpecialIdAsync(string adminSpecialId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> AdminExistsAsync(string adminSpecialId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> LockLecturerAccountAsync(int LecturerId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> UnlockLecturerAccountAsync(int LecturerId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> SuspendLecturerAsync(int LecturerId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> ReinstateLecturerAsync(int LecturerId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
